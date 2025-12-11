@@ -20,3 +20,14 @@
 
 ### Enlace (L2)
 #### Camada de link, precisa de cabo conectado.
+
+## A vida de um pacote. 
+
+| Camada (Envio) | Unidade de Dados | Fluxo | Unidade de Dados | Camada (Recepção) |
+| :--- | :--- | :---: | :--- | :--- |
+| **Aplicação** | HTTP Post | ⬇️ | Recebe o Post | **Aplicação** |
+| **Transporte** | Segmento TCP | ⬇️ | Segmento TCP | **Transporte** |
+| **Rede** | Datagrama IP | ⬇️ | Datagrama IP | **Rede** |
+| **Link** | Frame | ⬇️ | Frame | **Link** |
+| **Física** | Frame | ➡️ | Frame | **Física** |
+| | **Conexão Física** | | **Conexão Física** | |
