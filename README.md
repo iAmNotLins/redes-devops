@@ -31,3 +31,39 @@
 | **Link** | Frame | ⬇️ | Frame | **Link** |
 | **Física** | Frame | ➡️ | Frame | **Física** |
 | | **Conexão Física** | | **Conexão Física** | |
+
+
+
+#### payload é os dados(informações http) 
+
+#### http é um protocolo que por baixo dos panos ele vai usar o tcp
+#### Transporte - quebra isso em vários segmentos para poder fazer esse transporte. Ele também é responsável pela porta que vai ser enviado, exemplo porta :80
+#### Rede - é responsável por saber o IP a quem ela precisa enviar, ela basicamente pega as informações acima e adiciona o ip nela. 
+#### Link - datagrama deixa de ser um datagrama e vira um frame, será transportado através desse link.
+#### Física - Cabos fibra ótica aonde vai passar isso 
+
+### O processo acima é a parte de envio, no recebimento é somente inverter o processo.
+#### Cada camada injeta os heders importantes para cada camada. Transporte coloca a porta, rede coloca o IP e por ai vai. Isso faz com que saibam exatamente aonde esse pacote precisa ser entregue.
+
+
+A Escadinha do TCP/IP (Encapsulamento)
+
+L5 (Aplicação)            +------------+------+
+                          | App Header | blog |
+                          +------------+------+
+
+L4 (Transporte)    +------------+------------+------+
+                   | TCP Header | App Header | blog |
+                   +------------+------------+------+
+
+L3 (Rede)   +-----------+------------+------------+------+
+            | IP Header | TCP Header | App Header | blog |
+            +-----------+------------+------------+------+
+
+L2 (Link) +----------+-----------+------------+------------+------+
+          | Ethernet | IP Header | TCP Header | App Header | blog |
+          +----------+-----------+------------+------------+------+
+
+L1 (Física) -------------------------------------------------------
+            0101111010110001010101111001011 (Bits na rede)
+            -------------------------------------------------------
