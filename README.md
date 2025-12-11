@@ -48,22 +48,10 @@
 
 A Escadinha do TCP/IP (Encapsulamento)
 
-L5 (Aplicação)            +------------+------+
-                          | App Header | blog |
-                          +------------+------+
-
-L4 (Transporte)    +------------+------------+------+
-                   | TCP Header | App Header | blog |
-                   +------------+------------+------+
-
-L3 (Rede)   +-----------+------------+------------+------+
-            | IP Header | TCP Header | App Header | blog |
-            +-----------+------------+------------+------+
-
-L2 (Link) +----------+-----------+------------+------------+------+
-          | Ethernet | IP Header | TCP Header | App Header | blog |
-          +----------+-----------+------------+------------+------+
-
-L1 (Física) -------------------------------------------------------
-            0101111010110001010101111001011 (Bits na rede)
-            -------------------------------------------------------
+| Camada | L2 Header | L3 Header | L4 Header | L5+ Header | Payload (Dados) |
+| :--- | :---: | :---: | :---: | :---: | :--- |
+| **L5** | | | | **App Header** | blog |
+| **L4** | | | **TCP Header** | App Header | blog |
+| **L3** | | **IP Header** | TCP Header | App Header | blog |
+| **L2** | **Ethernet** | IP Header | TCP Header | App Header | blog |
+| **L1** | `0101...` | `1010...` | `0111...` | `1100...` | `0101` |
