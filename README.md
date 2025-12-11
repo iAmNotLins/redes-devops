@@ -55,3 +55,10 @@ A Escadinha do TCP/IP (Encapsulamento)
 | **L3** | | **IP Header** | TCP Header | App Header | blog |
 | **L2** | **Ethernet** | IP Header | TCP Header | App Header | blog |
 | **L1** | `0101...` | `1010...` | `0111...` | `1100...` | `0101` |
+
+#### L4, vai ter o source port, e o destination port. 
+#### L3, vai ter o source IP, e destination IP
+#### L2, qual mac address ele tem que entregar (parte mais física)
+#### L1, camada mais binaria, quebrar ele em partes e transferir pela fibra ótica. 
+
+#### As mais relevantes são L5, L4 e L3. Pois contem o dados, a porta e o IP de origem e destino.
