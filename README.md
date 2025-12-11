@@ -62,3 +62,64 @@ A Escadinha do TCP/IP (Encapsulamento)
 #### L1, camada mais binaria, quebrar ele em partes e transferir pela fibra ótica. 
 
 #### As mais relevantes são L5, L4 e L3. Pois contem o dados, a porta e o IP de origem e destino.
+
+### HTTP Message
+
+#### Atua diretamente com a aplicação, é a camada que mais utilizamos. 
+
+### Fundamentos 
+
+#### 1- Usado para comunicação web
+#### 2- Usado também no backend, para construção de API, aonde os dados podem ser consumidos através de uma requisição HTTP. 
+### Como é feito uma requisição HHTP?
+#### Requisição GET: É um método http para busca de dados
+#### Requisição POST:Enviar dados
+#### Requisição PUT: Usado em upload de algo (imagem, video)
+#### Requisição PATCH: Aplica modificações parciais a um recurso.
+#### Requisição DELETE: Remove um recurso.
+#### Requisição HEAD: Solicita apenas os cabeçalhos de uma resposta.
+#### Requisição OPTIONS: Descreve as opções de comunicação para o recurso de destino
+
+### URI: Exemplo - closedcircle.com.br/seal-project, a URI é o que vem depois do /
+#### Baseado nos seu Headers é o que vão saber o que fazer com a requisição.
+
+| Campo HTTP | Valor |
+| :--- | :--- |
+| **Host** | `mateusmuller.me` |
+| **Connection** | `close` |
+| **User-agent** | `Mozilla` |
+| **Accept-language** | `br` |
+
+
+### HTTP Response
+
+| Campo | Valor |
+| :--- | :--- |
+| **Status** | `HTTP/1.1 200 OK` |
+| **Connection** | `close` |
+| **Date** | `Tue, 2 Nov 2020 20:36 GMT` |
+| **Server** | `Apache/2.2.3 (CentOS)` |
+| **Last-Modified** | `Tue, 2 Nov 2020 19:47 GMT` |
+| **Content-Length** | `6821` |
+| **Content-Type** | `Text/html` |
+| **Body** | `(data data data ...)` |
+
+
+| Código | Status (Nome) | Categoria | Significado Rápido |
+| :---: | :--- | :---: | :--- |
+| **200** | `OK` | ✅ Sucesso | A requisição funcionou perfeitamente. |
+| **201** | `Created` | ✅ Sucesso | Sucesso e algo foi criado (comum em POST). |
+| **204** | `No Content` | ✅ Sucesso | Sucesso, mas não há nada para retornar. |
+| **301** | `Moved Permanently` | 🔄 Redirecionamento | A página mudou de endereço para sempre. |
+| **302** | `Found` | 🔄 Redirecionamento | A página mudou de endereço temporariamente. |
+| **304** | `Not Modified` | 🔄 Cache | Conteúdo não mudou, usa-se o cache. |
+| **400** | `Bad Request` | ⚠️ Erro Cliente | Requisição inválida ou mal formatada. |
+| **401** | `Unauthorized` | ⚠️ Erro Cliente | Falta autenticação (Login). |
+| **403** | `Forbidden` | ⚠️ Erro Cliente | Sem permissão de acesso. |
+| **404** | `Not Found` | ⚠️ Erro Cliente | Recurso não encontrado. |
+| **429** | `Too Many Requests` | ⚠️ Erro Cliente | Muitas requisições (Rate Limit). |
+| **500** | `Internal Server Error`| 🚨 Erro Servidor | Erro genérico no servidor. |
+| **502** | `Bad Gateway` | 🚨 Erro Servidor | Erro de comunicação entre servidores/proxy. |
+| **503** | `Service Unavailable` | 🚨 Erro Servidor | Servidor caiu ou está cheio. |
+| **504** | `Gateway Timeout` | 🚨 Erro Servidor | Tempo limite esgotado. |
+
