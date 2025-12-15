@@ -172,3 +172,59 @@ Uma **única conexão TCP** é mantida aberta pelo servidor para que o cliente p
 | **Eficiência** | Baixa (muito overhead). | Alta (pouco overhead). |
 | **Versão HTTP** | Padrão no HTTP/1.0. | Padrão no HTTP/1.1 e superiores. |
 | **Custo (RTT)** | Alto (2 RTTs por objeto). | Baixo (1 RTT para vários objetos após conexão). |
+
+## 📄 Arquivo HAR (HTTP Archive)
+O **HAR** é um arquivo JSON gerado pelo navegador que registra todas as requisições e respostas feitas durante o carregamento de uma página. É um "raio-x" do tráfego.
+
+### Para que serve
+- **Diagnóstico:** Identificação de lentidão, erros de carregamento e falhas em APIs.
+- **Análise de Performance:** Visualização do tempo de cada requisição (*waterfall*), tamanho dos arquivos e ordem de carregamento.
+- **Depuração Técnica:** Permite ver headers, payloads e cookies trocados entre cliente e servidor.
+- **Auditoria:** Verificação de segurança e códigos de status.
+
+---
+
+## 🍪 Cookie
+Um pequeno arquivo de texto que o servidor solicita que o navegador armazene para manter informações de estado (stateful).
+
+### Como funciona
+1. **Envio:** O servidor envia o cookie no cabeçalho de resposta (`Set-Cookie`) ao navegador.
+2. **Armazenamento:** O navegador salva o arquivo localmente.
+3. **Retorno:** Em toda nova requisição para aquele domínio, o navegador envia o cookie de volta automaticamente.
+
+### Para que serve
+- **Sessão:** Manter o usuário logado entre páginas.
+- **Preferências:** Salvar configurações como tema (dark/light) ou idioma.
+- **Tracking:** Monitoramento para analytics e anúncios personalizados.
+
+---
+
+## 🛡️ Proxy
+Um servidor intermediário que atua como uma "ponte" entre o dispositivo do usuário (cliente) e a internet (servidor de destino).
+
+### Como funciona
+1. O cliente faz uma requisição.
+2. O tráfego passa pelo **Proxy** antes de ir para a internet.
+3. O Proxy analisa, filtra ou modifica a requisição e a envia ao destino.
+4. A resposta volta para o Proxy, que a entrega ao cliente.
+
+### Para que serve
+- **Privacidade:** Oculta o endereço IP real do usuário.
+- **Segurança:** Bloqueia sites maliciosos e aplica filtros de conteúdo.
+- **Controle:** Usado por empresas para restringir acessos na rede corporativa.
+- **Acesso:** Permite contornar bloqueios geográficos.
+
+---
+
+## ⚡ Proxy Cache
+Um tipo específico de proxy focado em otimização de performance, armazenando cópias de recursos estáticos.
+
+### Como funciona
+- **Cache HIT:** O conteúdo solicitado já está salvo no proxy → Entrega imediata (sem ir ao servidor original).
+- **Cache MISS:** O conteúdo não está salvo → O proxy busca no servidor original, entrega ao usuário e salva uma cópia.
+
+### Para que serve
+- **Velocidade:** Reduz drasticamente o tempo de carregamento para o usuário final.
+- **Economia de Banda:** Evita o download repetido de arquivos grandes.
+- **Redução de Carga (Load):** Diminui o número de requisições que chegam ao servidor de aplicação (backend).
+- **Estabilidade:** Pode servir conteúdo em cache mesmo se o servidor de origem estiver instável.
