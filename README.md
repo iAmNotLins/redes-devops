@@ -123,3 +123,52 @@ A Escadinha do TCP/IP (Encapsulamento)
 | **503** | `Service Unavailable` | 🚨 Erro Servidor | Servidor caiu ou está cheio. |
 | **504** | `Gateway Timeout` | 🚨 Erro Servidor | Tempo limite esgotado. |
 
+# HTTP Persistente vs. Não Persistente
+
+### 1. HTTP Não Persistente (Non-Persistent)
+**Como funciona:**
+Para cada arquivo (HTML, imagem, script), uma **nova conexão TCP** é estabelecida. O arquivo é transferido e a conexão é imediatamente fechada.
+
+* **Processo:**
+    1. Cliente pede a URL.
+    2. Estabelece conexão TCP (1 RTT).
+    3. Cliente pede o objeto (Ex: HTML).
+    4. Servidor envia o objeto (1 RTT para request/response).
+    5. **Conexão TCP é fechada.**
+    6. *Repete-se tudo para cada imagem/CSS/JS (2 RTTs + tempo de transmissão por objeto).*
+
+* **🔴 Desvantagens:**
+    * Alto custo de tempo (overhead).
+    * Consumo excessivo de recursos do servidor para abrir e fechar conexões repetidamente.
+
+---
+
+### 2. HTTP Persistente (Persistent)
+**Como funciona:**
+Uma **única conexão TCP** é mantida aberta pelo servidor para que o cliente possa solicitar vários objetos através dela, sem precisar reestabelecer a conexão a cada vez.
+
+* **Processo:**
+    1. Cliente pede a URL e estabelece conexão TCP.
+    2. Cliente pede objetos (HTML, imagens, etc.) pela **mesma conexão**.
+    3. Servidor envia os objetos.
+    4. A conexão permanece aberta para futuras requisições ou é fechada após um tempo limite (*timeout*).
+
+* **🟢 Vantagens:**
+    * **Menos Latência:** Elimina o tempo de *handshake* TCP para cada objeto.
+    * **Economia de Recursos:** Menos sobrecarga no processador do servidor e do cliente.
+    * **Mais Rápido:** Permite o carregamento de páginas web complexas de forma muito mais eficiente.
+
+* **⚙️ Implementação:**
+    * É o padrão no **HTTP/1.1** e superiores.
+    * Usa cabeçalhos como `Connection: Keep-Alive` (ou assume isso por padrão).
+
+---
+
+### 📊 Resumo das Diferenças
+
+| Característica | HTTP Não Persistente | HTTP Persistente |
+| :--- | :--- | :--- |
+| **Conexão** | Uma conexão por objeto (fechada após cada). | Uma conexão para múltiplos objetos (reutilizada). |
+| **Eficiência** | Baixa (muito overhead). | Alta (pouco overhead). |
+| **Versão HTTP** | Padrão no HTTP/1.0. | Padrão no HTTP/1.1 e superiores. |
+| **Custo (RTT)** | Alto (2 RTTs por objeto). | Baixo (1 RTT para vários objetos após conexão). |
