@@ -247,19 +247,19 @@ curl URL -L
 curl URL -LI
 ````
 
-# Salva a resposta em um arquivo com o mesmo nome do arquivo remoto
+#### Salva a resposta em um arquivo com o mesmo nome do arquivo remoto
 curl -O URL 
 
-# Salva a resposta em um arquivo com um nome específico
+#### Salva a resposta em um arquivo com um nome específico
 curl -o nome_arquivo.html URL 
 
-# Realiza a requisição ignorando verificação de certificado SSL (inseguro, usado em dev)
+#### Realiza a requisição ignorando verificação de certificado SSL (inseguro, usado em dev)
 curl -k URL
 
 ### Inserção de dados através do Curl (POST)
 
 **Exemplo de envio de JSON via linha de comando**
-
+```
 curl -d '{
   "name": "Leonardo",
   "last_name": "Vidal",
@@ -267,6 +267,7 @@ curl -d '{
   "email": "example@teste",
   "birth_data": "1996-10-29"
 }' -X POST -H "content-type: application/json" localhost:5000/register
+```
 
 > **Nota:** Se o CPF for inválido, a API já retorna mostrando o erro de validação.
 
@@ -274,8 +275,9 @@ curl -d '{
 
 Geralmente em APIs maiores, importa-se um arquivo com os dados necessários. Assim, o `curl` lê o arquivo ao invés de você ter que passar as strings inteiras na linha de comando.
 
+```
 curl -d @arquivo.json -X POST -H "content-type: application/json" localhost:5000/register
-
+```
 #### Explicação do comando acima:
 
 A flag `-d @arquivo.json` instrui o `curl` a ler o conteúdo do arquivo localizado no seu computador (neste caso, `arquivo.json`) e enviá-lo no corpo da requisição.
