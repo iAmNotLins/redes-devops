@@ -229,57 +229,59 @@ Um tipo específico de proxy focado em otimização de performance, armazenando 
 - **Redução de Carga (Load):** Diminui o número de requisições que chegam ao servidor de aplicação (backend).
 - **Estabilidade:** Pode servir conteúdo em cache mesmo se o servidor de origem estiver instável.
 
-  # Relembrando: Métodos HTTP
+ # Relembrando: Métodos HTTP
 
-* **GET:** Busca de dados
-* **POST:** Inserção de dados
+- **GET** → Busca de dados  
+- **POST** → Inserção de dados  
+
+---
 
 ## Curl
 
 ### Comandos para GET
 
-Comandos comuns no curl:
+**Comandos comuns no `curl`:**
 
-```bash
-curl URL -I
-curl URL -Iv
-curl URL -L
-curl URL -LI
-````
+    curl URL -I
+    curl URL -Iv
+    curl URL -L
+    curl URL -LI
 
-#### Salva a resposta em um arquivo com o mesmo nome do arquivo remoto
-curl -O URL 
+**Outros comandos GET bastante utilizados:**
 
-#### Salva a resposta em um arquivo com um nome específico
-curl -o nome_arquivo.html URL 
+    curl URL
+    curl -v URL
+    curl -H "Authorization: Bearer TOKEN" URL
+    curl -H "Accept: application/json" URL
 
-#### Realiza a requisição ignorando verificação de certificado SSL (inseguro, usado em dev)
-curl -k URL
+---
 
-### Inserção de dados através do Curl (POST)
+## Inserção de dados através do Curl (POST)
 
-**Exemplo de envio de JSON via linha de comando**
-```
-curl -d '{
-  "name": "Leonardo",
-  "last_name": "Vidal",
-  "cpf": "516.925.785-41",
-  "email": "example@teste",
-  "birth_data": "1996-10-29"
-}' -X POST -H "content-type: application/json" localhost:5000/register
-```
+### Exemplo de envio de JSON via linha de comando
 
-> **Nota:** Se o CPF for inválido, a API já retorna mostrando o erro de validação.
+    curl -X POST -H "Content-Type: application/json" -d '{
+      "name": "Leonardo",
+      "last_name": "Vidal",
+      "cpf": "516.925.785-41",
+      "email": "example@teste",
+      "birth_data": "1996-10-29"
+    }' http://localhost:5000/register
 
-### Envio de dados via Arquivo
+Caso o **CPF seja inválido**, a API retorna automaticamente uma mensagem de erro indicando a falha na validação.
 
-Geralmente em APIs maiores, importa-se um arquivo com os dados necessários. Assim, o `curl` lê o arquivo ao invés de você ter que passar as strings inteiras na linha de comando.
+---
 
-```
-curl -d @arquivo.json -X POST -H "content-type: application/json" localhost:5000/register
-```
-#### Explicação do comando acima:
+## Envio de dados via arquivo
 
-A flag `-d @arquivo.json` instrui o `curl` a ler o conteúdo do arquivo localizado no seu computador (neste caso, `arquivo.json`) e enviá-lo no corpo da requisição.
+Em APIs maiores, é comum importar um arquivo contendo os dados necessários.  
+Assim, o `curl` lê o conteúdo do arquivo em vez de você precisar passar todas as strings diretamente pela linha de comando.
 
-O símbolo `@` é essencial aqui; sem ele, o `curl` enviaria apenas o texto literal "arquivo.json" em vez do conteúdo do arquivo. Isso facilita muito o teste de payloads grandes e complexos.
+    curl -X POST -H "Content-Type: application/json" -d @arquivo.json http://localhost:5000/register
+
+### Explicação do comando acima
+
+- A flag `-d @arquivo.json` instrui o `curl` a ler o conteúdo do arquivo localizado no seu computador (neste caso, `arquivo.json`) e enviá-lo no corpo da requisição.
+- O símbolo `@` é essencial: sem ele, o `curl` enviaria apenas o texto literal `arquivo.json` em vez do conteúdo do arquivo.
+- Essa abordagem facilita o envio de **payloads grandes e complexos**, além de tornar os testes mais organizados e reutilizáveis.
+
