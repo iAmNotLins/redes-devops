@@ -245,6 +245,7 @@ curl URL -I
 curl URL -Iv
 curl URL -L
 curl URL -LI
+````
 
 # Salva a resposta em um arquivo com o mesmo nome do arquivo remoto
 curl -O URL 
