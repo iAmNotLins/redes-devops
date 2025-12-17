@@ -228,3 +228,39 @@ Um tipo específico de proxy focado em otimização de performance, armazenando 
 - **Economia de Banda:** Evita o download repetido de arquivos grandes.
 - **Redução de Carga (Load):** Diminui o número de requisições que chegam ao servidor de aplicação (backend).
 - **Estabilidade:** Pode servir conteúdo em cache mesmo se o servidor de origem estiver instável.
+
+  # Relembrando: Métodos HTTP
+
+* **GET:** Busca de dados
+* **POST:** Inserção de dados
+
+## Curl
+
+### Comandos para GET
+
+Comandos comuns no curl:
+
+```bash
+curl URL -I
+curl URL -Iv
+curl URL -L
+curl URL -LI
+
+# Salva a resposta em um arquivo com o mesmo nome do arquivo remoto
+curl -O URL 
+
+# Salva a resposta em um arquivo com um nome específico
+curl -o nome_arquivo.html URL 
+
+# Realiza a requisição ignorando verificação de certificado SSL (inseguro, usado em dev)
+curl -k URL
+
+curl -d '{
+  "name": "Leonardo",
+  "last_name": "Vidal",
+  "cpf": "516.925.785-41",
+  "email": "example@teste",
+  "birth_data": "1996-10-29"
+}' -X POST -H "content-type: application/json" localhost:5000/register
+
+curl -d @arquivo.json -X POST -H "content-type: application/json" localhost:5000/register
